@@ -1,20 +1,44 @@
 pipeline {
     agent any
+
+    environment {
+        DOCKER_IMAGE = "property-view"
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Hart4G2/HotelApplication'
+                checkout scm
             }
         }
         stage('Build') {
             steps {
-                sh './mvnw clean package'
+                echo 'Сборка проекта...'
+                sh 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                sh './mvnw test'
+                echo 'Запуск тестов...'
+                sh 'mvn test'
             }
+            post {
+                always {
+                    junit '**/target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                echo 'Упаковка проекта...'
+                sh 'mvn package -DskipTests'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline завершён.'
         }
     }
 }
