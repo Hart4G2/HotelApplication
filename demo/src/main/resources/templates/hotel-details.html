@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${hotel.name}">Детали отеля</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <h1 th:text="${hotel.name}">Отель</h1>
+    <nav>
+        <a href="/ui/hotels" class="nav-link">Назад к списку</a>
+    </nav>
+</header>
+
+<div class="container">
+    <p><strong>Описание:</strong> <span th:text="${hotel.description}"></span></p>
+    <p><strong>Бренд:</strong> <span th:text="${hotel.brand}"></span></p>
+
+    <h3>Адрес</h3>
+    <p>
+        <span th:text="${hotel.houseNumber}"></span>
+        <span th:text="${hotel.street}"></span>,
+        <span th:text="${hotel.city}"></span>,
+        <span th:text="${hotel.country}"></span>,
+        <span th:text="${hotel.postCode}"></span>
+    </p>
+
+    <h3>Контакты</h3>
+    <p>Телефон: <span th:text="${hotel.phone}"></span></p>
+    <p>Email: <span th:text="${hotel.email}"></span></p>
+
+    <h3>Время заселения</h3>
+    <p>Заезд: <span th:text="${hotel.checkIn}"></span></p>
+    <p>Выселение: <span th:text="${hotel.checkOut}"></span></p>
+
+    <h3>Удобства</h3>
+    <ul>
+        <li th:each="amenity : ${hotel.amenities}" th:text="${amenity}"></li>
+    </ul>
+</div>
+</body>
+</html>
