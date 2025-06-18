@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Отели</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <h1>Список отелей</h1>
+    <nav>
+        <a href="/ui/hotels" class="nav-link">Главная</a>
+        <a href="/ui/create-hotel" class="nav-link">Добавить отель</a>
+    </nav>
+</header>
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Адрес</th>
+            <th>Телефон</th>
+            <th>Детальнее</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="hotel : ${hotels}">
+            <td th:text="${hotel.id}">1</td>
+            <td th:text="${hotel.name}">Название</td>
+            <td th:text="${hotel.description}">Описание</td>
+            <td th:text="${hotel.address}">Полный адрес</td>
+            <td th:text="${hotel.phone}">Телефон</td>
+            <td><a th:href="@{'/ui/hotel/' + ${hotel.id}}">Детали</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
